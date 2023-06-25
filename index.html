@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODOs</title>
+</head>
+<script>
+function onPress(){
+    var title = document.getElementById('title')
+    var description = document.getElementById('desc')
+    
+    fetch('http://localhost:3000/todos',{
+        method:'POST',
+        body:JSON.stringify({
+            title:title.value,
+            description:description.value
+        }),
+        headers:{
+            "Content-Type": "application/json"
+        }
+    }).then(res=>{
+        res.json().then(data=>{
+            console.log(data)
+        })
+    })
+}
+
+</script>
+
+<body>
+    <h1>Title<span><input placeholder="Enter title" id="title"></span></h1>
+    <h1>Description<span><input placeholder="description" id="desc"></span></h1>
+    <button onclick="onPress()">Save</button>
+</body>
+</html>
